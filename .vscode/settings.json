@@ -1,0 +1,6 @@
+{
+    "remote.WSL.fileWatcher.polling": true,
+    "files.watcherExclude": {
+        "**/.git/**": true
+    }
+}
