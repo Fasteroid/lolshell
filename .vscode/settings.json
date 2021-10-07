@@ -2,5 +2,10 @@
     "remote.WSL.fileWatcher.polling": true,
     "files.watcherExclude": {
         "**/.git/**": true
+    },
+    "files.associations": {
+        "*.slang": "hlsl",
+        "*.rmd": "markdown",
+        "typeinfo": "c"
     }
 }
