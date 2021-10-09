@@ -1,16 +1,22 @@
 /* 
   get_path.h
-  Ben Miller
-
+  Ben Miller + Caleb Brownstein's 'free_path'
 */
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
 
-/* function prototype.  It returns a pointer to a linked list for the path
-   elements. */
+/**
+ * Retrieves and sets up the path element linked list
+ * @returns pointer to first element of linked list
+*/
 struct pathelement *get_path();
+
+/**
+ * Frees a pathelement linked list retrieved by get_path()
+*/
+void free_path();
 
 struct pathelement
 {
