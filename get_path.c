@@ -7,38 +7,63 @@
 */
 #include "get_path.h"
 
+// keep track of these locally to make usage easier
+char *pathstring;
+struct pathelement *pathlistlocal;
+
 struct pathelement *get_path()
 {
-    /* path is a copy of the PATH and p is a temp pointer */
-    char *path, *p;
 
-    /* tmp is a temp point used to create a linked list and pathlist is a
+    if(pathlistlocal){ // auto free the last pathlistlocal
+        free_path();
+    }
+
+    /* path is a copy of the PATH and p is a temp pointer */
+    char *p;
+
+    /* tmp is a temp point used to create a linked list and pathlistlocal is a
          pointer to the head of the list */
-    struct pathelement *tmp, *pathlist = NULL;
+    struct pathelement *tmp = NULL;
 
     p = getenv("PATH");	/* get a pointer to the PATH env var.
                  make a copy of it, since strtok modifies the
                  string that it is working with... */
-    path = malloc((strlen(p)+1)*sizeof(char));	/* use malloc(3) */
-    strncpy(path, p, strlen(p));
-    path[strlen(p)] = '\0';
+    pathstring = malloc((strlen(p)+1)*sizeof(char));	/* use malloc(3) */
+    // printf("alloc: %p\n",pathstring);
+    strncpy(pathstring, p, strlen(p));
+    pathstring[strlen(p)] = '\0';
 
-    p = strtok(path, ":"); 	/* PATH is : delimited */
+    p = strtok(pathstring, ":"); 	/* PATH is : delimited */
     do				/* loop through the PATH */
     {				/* to build a linked list of dirs */
-        if ( !pathlist )		/* create head of list */
+        if ( !pathlistlocal )		/* create head of list */
         {
             tmp = calloc(1, sizeof(struct pathelement));
-            pathlist = tmp;
+            // printf("alloc: %p\n",tmp);
+            pathlistlocal = tmp;
         }
         else			/* add on next element */
         {
             tmp->next = calloc(1, sizeof(struct pathelement));
+            // printf("alloc: %p\n",tmp->next);
             tmp = tmp->next;
         }
         tmp->element = p;	
         tmp->next = NULL;
     } while ( p = strtok(NULL, ":") );
-
-    return pathlist;
+    return pathlistlocal;
 } /* end get_path() */
+
+/**
+ * Frees the pathelement linked list retrieved by get_path()
+*/
+void free_path(){
+    while (pathlistlocal != NULL) {
+        struct pathelement *delete = pathlistlocal;
+        pathlistlocal = pathlistlocal->next;
+        free(delete);
+        // printf("free: %p\n",delete);
+    }
+    free(pathstring); // don't forget this!
+    // printf("free: %p\n",pathstring);
+}
