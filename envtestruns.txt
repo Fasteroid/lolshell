@@ -1,0 +1,41 @@
+
+setenv HOME tests {
+
+    root@FASTEROID-E2:/mnt/c/Users/Faste/Desktop/Linuxspace/project2# ./lolshell
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > printenv HOME
+    printenv:
+      HOME=/root
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > setenv HOME /lol
+    setenv: WARNING: Invalid HOME directory '/lol' provided. Not setting.
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > printenv HOME
+    printenv:
+      HOME=/root
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > cd
+    lolshell [/root] > cd -
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > setenv HOME /mnt/c/Users/Faste
+    setenv: Value changed.
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > printenv HOME
+    printenv:
+      HOME=/mnt/c/Users/Faste
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > cd
+    lolshell [/mnt/c/Users/Faste] > 
+
+}
+
+setenv PATH tests {
+
+    root@FASTEROID-E2:/mnt/c/Users/Faste/Desktop/Linuxspace/project2# ./lolshell
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > where java.exe
+    where: /mnt/c/Program Files (x86)/Common Files/Oracle/Java/javapath/java.exe
+    where: /mnt/c/Program Files/Java/jdk1.8.0_241/bin/java.exe
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > where ls
+    where: /bin/ls
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > setenv PATH /bin
+    setenv: Value changed.
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > where java.exe
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > where ls 
+    where: /bin/ls
+    lolshell [/mnt/c/Users/Faste/Desktop/Linuxspace/project2] > 
+
+}
+
