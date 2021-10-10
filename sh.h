@@ -1,7 +1,7 @@
 
 #include "get_path.h"
 
-int pid;
+int pid, status;
 char *pwd, *prompt;
 
 int sh( int argc, char **argv, char **envp);
