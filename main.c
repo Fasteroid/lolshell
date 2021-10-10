@@ -5,18 +5,21 @@
 void sig_handler(int sig){
     switch (sig){
         case SIGTERM:
+            // thx stackoverflow: https://stackoverflow.com/questions/16891019/how-to-avoid-using-printf-in-a-signal-handler
             write(STDOUT_FILENO,"\n",2);
+            if(!pid) exit(0);
         break;
 
         case SIGINT:
-            // thx stackoverflow: https://stackoverflow.com/questions/16891019/how-to-avoid-using-printf-in-a-signal-handler
             write(STDOUT_FILENO,"\n",2);
             printprompt();
+            if(!pid) exit(0);
         break;
 
         case SIGTSTP:
             write(STDOUT_FILENO,"\n",2);
             printprompt();
+            if(!pid) exit(0);
         break;
         
         default:
@@ -27,8 +30,8 @@ void sig_handler(int sig){
 
 int main( int argc, char **argv, char **envp )
 {
-    signal(SIGINT,sig_handler); // will this work?
-    signal(SIGTSTP,sig_handler); // will this work?
+    signal(SIGINT,sig_handler);
+    signal(SIGTSTP,sig_handler);
     return sh(argc, argv, envp);
 }
 
